@@ -16,3 +16,5 @@ skip_screenshots true
 run_precheck_before_submit false
 #是否应该预先检查应用内购买
 precheck_include_in_app_purchases false
+#跳过更新 App Stroe Connect 的版本号
+skip_app_version_update true
