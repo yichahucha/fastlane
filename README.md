@@ -40,7 +40,7 @@ build a ijiami ipa
 ```
 fastlane ios submit_review
 ```
-upload binary to iTC (and maybe submit review)
+upload binary to iTC
 
 ----
 

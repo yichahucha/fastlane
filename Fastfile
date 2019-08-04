@@ -69,7 +69,7 @@ platform :ios do
 	end
 
 	# 上传 iTC 提审相关详细参数在 Deliverfile 文件
-	desc "upload binary to iTC (and maybe submit review)"
+	desc "upload binary to iTC"
 	lane :submit_review do | options |
 		#ipa文件的路径（外部调用 fastlane submit ipa:/../../ ）
 		ipa_path = options[:ipa]
