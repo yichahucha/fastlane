@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2018-09-08 11:40:23
+ * @LastEditTime: 2019-08-16 10:36:51
+ * @LastEditors: Please set LastEditors
+ -->
 fastlane documentation
 ================
 # Installation
@@ -20,27 +27,32 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios set_build_number
 ```
-set build number
+build number
 ### ios beta
 ```
 fastlane ios beta
 ```
-build a test ipa
+build a beta ipa
+### ios betaijm
+```
+fastlane ios betaijm
+```
+build a ijiami beta ipa
 ### ios release
 ```
 fastlane ios release
 ```
 build a release ipa
-### ios ijiami
+### ios releaseijm
 ```
-fastlane ios ijiami
+fastlane ios releaseijm
 ```
-build a ijiami ipa
+build a ijiami release ipa
 ### ios submit_review
 ```
 fastlane ios submit_review
 ```
-upload binary to iTC
+upload binary to iTC (and maybe submit review)
 
 ----
 

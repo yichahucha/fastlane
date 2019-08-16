@@ -12,6 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+# bundler exec fastlane beta
 
 default_platform(:ios)
 
@@ -21,57 +22,66 @@ platform :ios do
 		set_build_number
   	end
 
-	desc "set build number"
+	desc "build number"
 	lane :set_build_number do
-		# 更新构建版本号
-		increment_build_number(build_number: ENV["build_number"])
+		# 构建版本号更新（自增）
+		increment_build_number_in_plist
 	end
 
-	desc "build a test ipa"
+	# gym 公共参数查看 Gymfile 文件
+	desc "build a beta ipa"
 	lane :beta do
 		gym(
-			scheme: ENV["scheme"],
-			clean: true,
 			configuration: "Debug",#Release, Debug
 			export_method: "development",#app-store, ad-hoc, development
-			output_directory: ENV["ipa_folder_beta"]
+			output_directory: ENV["beta_folder"],
 		)
+		# 使用 fir-cli 工具上传
+		sh "#{Dir.pwd}/firim.sh"
+ 	end
 
-		# 使用 fastlane 插件 上传 firim
-		firim(firim_api_token: ENV["firim_token"])
+ 	desc "build a ijiami beta ipa"
+	lane :betaijm do
+		# 使用爱加密工具链打包 需要指定工具链和配置参数
+		gym(
+			configuration: "Debug",
+			export_method: "development",
+			output_directory: ENV["beta_folder"],
+			xcargs:"OTHER_CFLAGS='#{ENV["CFLAGS"]}' OTHER_CPLUSPLUSFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
+			toolchain:ENV["ijiami_toolchain"]
+		)
+		# 使用 fir-cli 工具上传
+		sh "#{Dir.pwd}/firim.sh"
  	end
 
 	desc "build a release ipa"
 	lane :release do
 		gym(
-			scheme: ENV["scheme"],
-			clean: true,
 			configuration:"Release",
 			export_method:"app-store",
-			output_directory: ENV["ipa_folder_release"]
+			output_directory: ENV["release_folder"]
 			)
+		# 提交 App Store Connect
 		submit_review
 	end
 
-	desc "build a ijiami ipa"
-	lane :ijiami do
-		# 使用爱加密打混淆包 需要指定工具链和配置参数（其他混淆工具，参看各自文档）
+	desc "build a ijiami release ipa"
+	lane :releaseijm do
 		gym(
-			scheme: ENV["scheme"],
-			clean: true,
 			configuration:"Release",
 			export_method:"app-store",
-			output_directory: ENV["ipa_folder_ijiami"],
+			output_directory: ENV["ijiami_folder"],
 			xcargs:"OTHER_CFLAGS='#{ENV["CFLAGS"]}' OTHER_CPLUSPLUSFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
-			toolchain:ENV["toolchain"]
+			toolchain:ENV["ijiami_toolchain"]
 			)
+		# 提交 App Store Connect
 		submit_review
 	end
 
-	# 上传 iTC 提审相关详细参数在 Deliverfile 文件
-	desc "upload binary to iTC"
+	# deliver 公共参数查看 Deliverfile 文件
+	desc "upload binary to iTC (and maybe submit review)"
 	lane :submit_review do | options |
-		#ipa文件的路径（外部调用 fastlane submit ipa:/../../ ）
+		# ipa 文件的路径（外部调用 fastlane submit ipa:/../../ ）
 		ipa_path = options[:ipa]
 		if ipa_path
 			deliver(ipa: ipa_path)

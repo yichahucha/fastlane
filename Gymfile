@@ -1,0 +1,11 @@
+# For more information about this configuration visit
+# https://docs.fastlane.tools/actions/gym/#gymfile
+
+# 该项目的 scheme ，确保将其标记为已共享
+scheme ENV["scheme"]
+
+# 生成的ipa文件的名称
+output_name ENV["scheme"]
+
+# 项目在建造之前是否应该进行 clean
+clean true

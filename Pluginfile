@@ -4,3 +4,4 @@
 
 gem 'fastlane-plugin-firim'
 gem 'fastlane-plugin-versioning'
+gem 'fir-cli'
