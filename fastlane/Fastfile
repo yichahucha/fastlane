@@ -81,7 +81,7 @@ platform :ios do
 	# deliver 公共参数查看 Deliverfile 文件
 	desc "upload binary to iTC (and maybe submit review)"
 	lane :submit_review do | options |
-		# ipa 文件的路径（外部调用 fastlane submit ipa:/../../ ）
+		# ipa参数（文件路径）（指定包路径上传iTC: fastlane submit_review ipa:x/x/x.ipa ）
 		ipa_path = options[:ipa]
 		if ipa_path
 			deliver(ipa: ipa_path)
