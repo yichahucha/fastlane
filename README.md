@@ -8,7 +8,9 @@
 
 # Instructions
 1. Copy `fastlane` folder、`Gemfile` `Gemfile.lock` file to your project root directory.
-2. Run with commands `bundle exec fastlane beta`, You can also change the specified action.
+2. Configuration information `.env`
+   ![.env](carbon.png)
+3. Run with commands `bundle exec fastlane beta`, You can also change the specified action.
 
 
 # Available Actions
@@ -43,5 +45,3 @@ build a ijiami release ipa
 bundle exec fastlane ios submit_review
 ```
 upload binary to iTC (and maybe submit review)
-
-----

@@ -47,7 +47,7 @@ platform :ios do
 			configuration: "Debug",
 			export_method: "development",
 			output_directory: ENV["beta_folder"],
-			xcargs:"OTHER_CFLAGS='#{ENV["CFLAGS"]}' OTHER_CPLUSPLUSFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
+			xcargs: "CFLAGS='#{ENV["CFLAGS"]}' CXXFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
 			toolchain:ENV["ijiami_toolchain"]
 		)
 		# 使用 fir-cli 工具上传
@@ -71,7 +71,7 @@ platform :ios do
 			configuration:"Release",
 			export_method:"app-store",
 			output_directory: ENV["ijiami_folder"],
-			xcargs:"OTHER_CFLAGS='#{ENV["CFLAGS"]}' OTHER_CPLUSPLUSFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
+			xcargs: "CFLAGS='#{ENV["CFLAGS"]}' CXXFLAGS='#{ENV["CFLAGS"]}' OTHER_SWIFT_FLAGS='#{ENV["SWIFTFLAG"]}'",
 			toolchain:ENV["ijiami_toolchain"]
 			)
 		# 提交 App Store Connect
